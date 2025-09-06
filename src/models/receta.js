@@ -37,13 +37,13 @@ const recetaSchema = new Schema({
     enum: ["Baja", "Media", "Alta"],
   },
   ingredientes: {
-    type: String,
+    type: [String],
     required: true,
     minLength: 1,
     maxLength: 80,
   },
   pasos: {
-    type: String,
+    type: [String],
     required: true,
     minLength: 1,
     maxLength: 150,

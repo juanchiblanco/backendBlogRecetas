@@ -1,4 +1,4 @@
-import recetasRoutes from "./recetas.routes";
+import recetasRoutes from "./recetas.routes.js";
 import { Router } from "express";
 
 const router = Router()
