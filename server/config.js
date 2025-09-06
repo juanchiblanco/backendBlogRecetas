@@ -17,7 +17,6 @@ export default class Server {
     this.app.use(morgan("dev"));
     const __dirname = dirname(fileURLToPath(import.meta.url));
     this.app.use(express.static(`${__dirname}/../public`));
-    console.log(`${__dirname}/../public`);
   }
 
   listen() {
