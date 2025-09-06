@@ -1,6 +1,6 @@
 import { body } from "express-validator";
-import resultadoValidacion from "./resultadoValidacion.js";
-import Receta from "..models/receta.js";
+import resultadoValidacion from "./resultadoValidaciones.js";
+import Receta from "../models/receta.js";
 
 const validacionReceta = [
   body("formPlato")
