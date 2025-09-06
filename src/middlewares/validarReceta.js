@@ -7,10 +7,10 @@ const validacionReceta = [
     .notEmpty()
     .withMessage("El nombre del plato es obligatorio")
     .isLength({ min: 2, max: 100 })
-    .withMessage("El nombre del producto debe tener entre 2 y 100 caracteres")
+    .withMessage("El nombre del plato debe tener entre 2 y 100 caracteres")
     .custom(async (valor, { req }) => {
       const platoExistente = await Receta.findOne({ formPlato: valor });
-      if (!productoExistente) {
+      if (!platoExistente) {
         return true;
       }
       if (req.params?.id && platoExistente._id.toString() === req.params.id) {
