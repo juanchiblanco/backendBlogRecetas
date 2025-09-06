@@ -30,3 +30,17 @@ export const leerRecetaPorId = async (req, res) => {
     res.status(500).json({ mensaje: "Error al obtener la receta solicitada" });
   }
 };
+
+export const borrarReceta = async (req, res) => {
+  try {
+    const recetaBorrada = await Receta.findByIdAndDelete(req.params.id);
+    if (!recetaBorrada) {
+      return res
+        .status(404)
+        .json({ mensaje: "No encontramos la receta y no pudo ser borrada" });
+    }
+    res.status(200).json({ mensaje: "Receta eliminada exitosamente" });
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al borrar la receta" });
+  }
+};
