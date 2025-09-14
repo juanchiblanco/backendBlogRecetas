@@ -1,3 +1,4 @@
+import generarJWT from "../helpers/generarJWT.js";
 import Usuario from "../models/usuario.js";
 import bcrypt from "bcrypt";
 
@@ -12,10 +13,13 @@ export const leerUsuarios = async (req, res) => {
 
 export const crearUsuario = async (req, res) => {
   try {
-    const {password} = req.body
-    const saltos = bcrypt.genSaltSync(10)
-      const passwordHash = bcrypt.hashSync(password,saltos)
-    const nuevoUsuario = new Usuario({email:req.body.email, password:passwordHash});
+    const { password } = req.body;
+    const saltos = bcrypt.genSaltSync(10);
+    const passwordHash = bcrypt.hashSync(password, saltos);
+    const nuevoUsuario = new Usuario({
+      email: req.body.email,
+      password: passwordHash,
+    });
     await nuevoUsuario.save();
     res.status(201).json({ mensaje: "El usuario fue creado exitosamente" });
   } catch (error) {
@@ -63,5 +67,26 @@ export const editarUsuario = async (req, res) => {
     res.status(200).json({ mensaje: "Usuario editado exitosamente" });
   } catch (error) {
     res.status(500).json({ mensaje: "Error al editar el usuario" });
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const usuarioLogueado = await Usuario.findOne({ email });
+    if (!usuarioLogueado) {
+      return res.status(404).json({ mensaje: "No se encontro el usuario" });
+    }
+    const passwordVerificado = bcrypt.compareSync(
+      password,
+      usuarioLogueado.password
+    );
+    if (!passwordVerificado) {
+      return res.status(401).json({ mensaje: "Credenciales incorrectas" });
+    }
+    const token = await generarJWT(usuarioLogueado.email);
+    res.status(200).json({ email: usuarioLogueado.email, token: token });
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al ingresar" });
   }
 };
