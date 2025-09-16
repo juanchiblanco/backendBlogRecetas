@@ -7,6 +7,7 @@ export const leerUsuarios = async (req, res) => {
     const listaUsuarios = await Usuario.find();
     res.status(200).json(listaUsuarios);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al leer los usuarios" });
   }
 };
@@ -23,6 +24,7 @@ export const crearUsuario = async (req, res) => {
     await nuevoUsuario.save();
     res.status(201).json({ mensaje: "El usuario fue creado exitosamente" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al crear el usuario" });
   }
 };
@@ -35,6 +37,7 @@ export const leerUsuarioPorId = async (req, res) => {
     }
     res.status(200).json(usuarioBuscado);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al obtener el usuario" });
   }
 };
@@ -49,6 +52,7 @@ export const borrarUsuario = async (req, res) => {
     }
     res.status(200).json({ mensaje: "Usuario eliminado exitosamente" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al borrar el usuario" });
   }
 };
@@ -66,6 +70,7 @@ export const editarUsuario = async (req, res) => {
     }
     res.status(200).json({ mensaje: "Usuario editado exitosamente" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al editar el usuario" });
   }
 };
@@ -87,6 +92,7 @@ export const login = async (req, res) => {
     const token = await generarJWT(usuarioLogueado.email);
     res.status(200).json({ email: usuarioLogueado.email, token: token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al ingresar" });
   }
 };

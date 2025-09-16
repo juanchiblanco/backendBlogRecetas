@@ -12,6 +12,7 @@ const verificarToken = (req, res, next) => {
     req.email = payload.email;
     next();
   } catch (error) {
+    console.error(error);
     res.status(401).json({ mensaje: "Token invalido", error: error.message });
   }
 };

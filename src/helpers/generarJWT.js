@@ -8,6 +8,7 @@ const generarJWT = async (email) => {
     });
     return token;
   } catch (error) {
+    console.error(error);
     throw new Error("No se pudo generar el token");
   }
 };

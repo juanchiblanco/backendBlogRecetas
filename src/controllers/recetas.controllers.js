@@ -5,6 +5,7 @@ export const leerRecetas = async (req, res) => {
     const recetas = await Receta.find();
     res.status(200).json(recetas);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al leer las recetas" });
   }
 };
@@ -15,6 +16,7 @@ export const crearReceta = async (req, res) => {
     await nuevaReceta.save();
     res.status(201).json({ mensaje: "La receta fue creada exitosamente" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al crear la receta" });
   }
 };
@@ -27,6 +29,7 @@ export const leerRecetaPorId = async (req, res) => {
     }
     res.status(200).json(recetaBuscada);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al obtener la receta solicitada" });
   }
 };
@@ -41,6 +44,7 @@ export const borrarReceta = async (req, res) => {
     }
     res.status(200).json({ mensaje: "Receta eliminada exitosamente" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al borrar la receta" });
   }
 };
@@ -53,6 +57,7 @@ export const editarReceta = async (req,res) => {
     }
     res.status(200).json({mensaje: 'Receta editada exitosamente'});
   } catch (error) {
+    console.error(error);
     res.status(500).json({ mensaje: "Error al editar la receta" });
   }
 }
